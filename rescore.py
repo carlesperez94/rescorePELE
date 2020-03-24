@@ -23,7 +23,7 @@ def score_glide(pdb, template=TEMPLATE, cpus=4, schrodinger=SCHRODINGER, output=
         shutil.copy(pdb, ".")
         tb.TemplateBuilder(input, {"INPUT": pdb, "PRECISION": "SP" })
         #command = "{0} xglide.py {1} -HOST {2}:{3}".format(schrodinger_exec, input, "Calculon_slurm", cpus)
-        command = "{0} xglide.py {1} -OVERWRITE".format(schrodinger_exec, input)
+        command = "{0} xglide.py {1} -OVERWRITE -HOST localhost:{}".format(schrodinger_exec, input, cpus)
         print(command)
         subprocess.call(command.split())
         
