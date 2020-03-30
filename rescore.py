@@ -4,7 +4,7 @@ import subprocess
 import os
 import template_builder as tb
 
-SCHRODINGER = "/opt/schrodinger2018-2/"
+SCHRODINGER = "/opt/schrodinger2018-4/"
 DIR = os.path.dirname(os.path.abspath(__file__))
 TEMPLATE = os.path.join(DIR, "glide.in")
 CPUS=4
@@ -23,7 +23,7 @@ def score_glide(pdb, template=TEMPLATE, cpus=4, schrodinger=SCHRODINGER, output=
         shutil.copy(pdb, ".")
         tb.TemplateBuilder(input, {"INPUT": pdb, "PRECISION": "SP" })
         #command = "{0} xglide.py {1} -HOST {2}:{3}".format(schrodinger_exec, input, "Calculon_slurm", cpus)
-        command = "{0} xglide.py {1} -OVERWRITE -HOST localhost:{}".format(schrodinger_exec, input, cpus)
+        command = "{0} xglide.py {1} -OVERWRITE -HOST localhost:40".format(schrodinger_exec, input)
         print(command)
         subprocess.call(command.split())
         

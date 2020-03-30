@@ -7,12 +7,13 @@ import glob
 
 def get_score(schrodinger=SCHRODINGER):
     jobs = [] 
-    for folder in glob.glob("*/"):
+    for folder in sorted(glob.glob("*/")):
+        print(folder)
         with cd(folder):
             log = glob.glob("*.log")[0]
             inputpdb = glob.glob("*.pdb")[0]
             inputglide = glob.glob("*.in")[0]
-            output = glob.glob("*maegz")[0]
+            output = glob.glob("*dock*lib.maegz")[0]
             schrodinger_exec = os.path.join(schrodinger, "utilities/glide_sort")
             command = "{0} -r report.txt {1}".format(schrodinger_exec, output)
             subprocess.call(command.split())
