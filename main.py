@@ -10,7 +10,6 @@ import build_model
 
 def main(rescore_pdb, template, schr, cpus, score_yes=False, dataset=None, model=False,
          dataout="."):
-    print(rescore_pdb)
     if rescore_pdb and not dataset:
         for pdb in rescore_pdb:
             dirname = os.path.basename(os.path.dirname(os.path.dirname(pdb)))
