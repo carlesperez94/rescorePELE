@@ -15,14 +15,15 @@ def retrieve(csv, csv2, structures_paths):
         folname = folder.split("/")[-2]
         df1 = df1[df1["paths"] == os.path.join(folname, "rep_structure.pdb")]
         with open(input_met,"r") as f:
-              atoms, weight, rotamers, total, interaction, rmsd, id  = f.readlines()[-1].split()[0:7]
+              atoms, weight, rotamers, total, interaction, rmsd, clusters, id  = f.readlines()[-1].split()[0:8]
               try:
                   score = df1["scores"].values[0]
               except IndexError:
                   print("WARNING: {} does not contain score.".format(input))
                   continue
               
-        row.append([folname, float(atoms), float(weight), float(rotamers), float(total), float(interaction), float(score)])
+        row.append([folname, float(atoms), float(weight), float(rotamers), float(total), float(interaction),
+                   float(clusters), float(score)])
     print(row)
-    df = pd.DataFrame(row, columns=["path", "atoms", "weight", "rotamers", "toten", "be", "internal"])
+    df = pd.DataFrame(row, columns=["path", "atoms", "weight", "rotamers", "toten", "be", "clusters", "internal"])
     df.to_csv("dataset.csv")
