@@ -15,7 +15,7 @@ def retrieve(csv, csv2, structures_paths):
         folname = folder.split("/")[-2]
         df1 = df1[df1["paths"] == os.path.join(folname, "rep_structure.pdb")]
         with open(input_met,"r") as f:
-              atoms, weight, rotamers, total, interaction, rmsd, clusters, id  = f.readlines()[-1].split()[0:8]
+              atoms, weight, rotamers, total, interaction, rmsd, clusters, globtot, globbe, id  = f.readlines()[-1].split()[0:10]
               try:
                   score = df1["scores"].values[0]
               except IndexError:
@@ -23,7 +23,7 @@ def retrieve(csv, csv2, structures_paths):
                   continue
               
         row.append([folname, float(atoms), float(weight), float(rotamers), float(total), float(interaction),
-                   float(clusters), float(score)])
+                   float(rmsd), float(clusters), float(globtot), float(globbe), float(score)])
     print(row)
-    df = pd.DataFrame(row, columns=["path", "atoms", "weight", "rotamers", "toten", "be", "clusters", "internal"])
+    df = pd.DataFrame(row, columns=["path", "atoms", "weight", "rotamers", "toten", "be", "rmsd","clusters", "glob total", "glob be","internal"])
     df.to_csv("dataset.csv")
