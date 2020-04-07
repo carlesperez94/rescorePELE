@@ -4,7 +4,7 @@ import subprocess
 import os
 import template_builder as tb
 
-SCHRODINGER = "/opt/schrodinger2018-4/"
+SCHRODINGER = "/data/general_software/schrodinger2018-2/"
 DIR = os.path.dirname(os.path.abspath(__file__))
 TEMPLATE = os.path.join(DIR, "glide.in")
 CPUS=4
